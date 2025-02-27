@@ -1,14 +1,11 @@
-.responsive-text(@size, @line-height) {
-  font-size: @size;
-  line-height: @line-height;
-}
+
 
 .half-inverted-panel {
   display: flex;
   flex-direction: column;
   background-color: @primary-text-color;
   color: @text-color;
-  font-family: @font-family;
+  margin-bottom: 5rem;
 
   .text-section {
     padding: @padding-medium;
@@ -45,14 +42,13 @@
   .image-section {
     img {
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
     }
   }
 }
 
 
-@media (min-width: @breakpoint-md) {
+@media (min-width: #breaks[tablet]) {
   .half-inverted-panel {
     flex-direction: row;
 
@@ -82,8 +78,48 @@
       flex: 1;
 
       img {
-        height: 100%;
-        object-fit: cover;
+        width: 100%;
+        height: 400px;
+        object-fit:fill;
+      }
+    }
+  }
+}
+
+
+@media (min-width: #breaks[desktop]) {
+  .half-inverted-panel {
+    flex-direction: row;
+
+    .text-section {
+      flex: 1;
+      padding: @padding-large;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h2 {
+        .responsive-text(40px, 1.2);
+      }
+
+      p {
+        .responsive-text(28px, 1.5);
+      }
+
+      .cta-button {
+        padding: @padding-small @padding-medium;
+        font-size: 18px;
+      }
+    }
+
+    .image-section {
+      flex: 1;
+
+      img {
+        width: 100%;
+        height: 600px;
+        object-fit:cover;
       }
     }
   }
