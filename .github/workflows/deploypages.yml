@@ -43,4 +43,4 @@ jobs:
           path: './dist'
       - name: github pages
         id: deployment
-        uses: actions/github-pages@v4
+        uses: actions/deploy-pages@v4
