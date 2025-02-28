@@ -2,7 +2,7 @@ name :despliegue en github pages del MPA vite
 
 on:
   push:
-    branches:["main"]
+    branches: ["main"]
 permissions:
   contents: read
   pages: write
