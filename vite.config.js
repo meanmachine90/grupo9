@@ -30,7 +30,16 @@ export default defineConfig({
         }
     },
     plugins: [
-        htmlPurge({})
+        htmlPurge({}),
+        createHtmlPlugin({
+            minify: true,
+            inject: {
+                data: {
+                    // Modifica las rutas manualmente
+                    replaceBase: './'
+                }
+            }
+        })
     ]
 
 });
