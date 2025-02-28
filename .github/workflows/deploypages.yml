@@ -1,47 +1,46 @@
-name :despliegue en github pages del MPA vite
+name: Despliegue a Github Pages del MPA con Vite
 
 on:
   push:
     branches: ["main"]
-    
+  workflow_dispatch:
 permissions:
   contents: read
   pages: write
   id-token: write
 env:
-DEPLOY_BASE_URL: ${{vars.DEPLOY_BASE_URL}}
+  DEPLOY_BASE_URL: ${{vars.DEPLOY_BASE_URL}}
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
   deploy:
-    environments:
-      DEPLOY_BASE_URL:
-        name: github-pages
-        url: ${{steps.github-pages.outputs.url}}
+    environment:
+      name: github-pages
+      url: ${{ steps.github_pages.outputs.url }}
+
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Clonar Repositorio
         uses: actions/checkout@v4
-      - name: Setup Node.js
+      - name: Configurar NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
-      - name: Install dependencies
+          node-version: '20'
+          cache: 'npm'
+      - name: Instalar Dependencias
         run: npm install
-      - name variables Ambiente
-        run: |
-          echo "DEPLOY_BASE_URL $DEPLOY_BASE_URL"
-      - name: Build
+      - name: Verificar Variables de Ambiente
+        run : echo "DEPLOY_BASE_URL $DEPLOY_BASE_URL"
+      - name: Compilar Proyecto
         run: npm run build
-      - name: configurar github pages
+      - name: Configurar Github Pages
         uses: actions/configure-pages@v5
-      -name: subir compilado
+      - name: Subir Compilado a Github Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
-      - name: github pages
+      - name: Publicar Página en Github Pages
         id: deployment
-        uses: actions/github-pages@v4
+        uses: actions/deploy-pages@v4
